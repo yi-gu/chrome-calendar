@@ -1,9 +1,42 @@
 <!DOCTYPE html>
-<html>
-<body>
+<style>
+body {
+  overflow-y: hidden;
+}
 
-<h1>Chrome Linear Calendar</h1>
-<img src="apr-june.png" alt="Trulli" width="100%" height="100%">
+.title {
+  position:fixed;
+  top:0;
+  text-align: center;
+  width: 100%;
+}
+</style>
 
-</body>
-</html>
+<div id="holder" style="will-change:transform;"></div>
+<h1 class='title'>Chrome Calender by Animations Team</h1>
+
+<script>
+const FIRST_DAY_2019 = new Date("Jan 1, 2019");
+const LAST_DAY_2019 = new Date("Dec 31, 2019");
+const DURATION = LAST_DAY_2019 - FIRST_DAY_2019;
+const TODAY = new Date();
+const PAST = TODAY - FIRST_DAY_2019;
+const BORDER = 500;
+
+let img = new Image();
+holder.appendChild(img);
+
+img.onload = function() {
+  const image_width = img.naturalWidth;
+  const image_height = img.naturalHeight;
+  let progress = PAST / DURATION * image_width - BORDER;
+  holder.style.transform = "matrix(2, 0, 0, 2, " + 0 + ", 0)";
+  let animation = img.animate([
+    { transform: 'translateX(' + -progress + 'px)' },
+    { transform: 'translateX(' + -image_width + 'px)' }
+  ], {
+    duration: DURATION - PAST
+  });
+}
+img.src = "full-calendar.jpg";
+</script>
