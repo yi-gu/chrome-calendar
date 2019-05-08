@@ -5,29 +5,29 @@ body {
 }
 
 .title {
+  font-size: 50px;
   text-align: center;
   height: 5vh;
 }
 
 #img_wrapper {
-  height: 80vh;
+  height: 75vh;
   overflow: hidden;
   will-change: transform;
 }
 
 .countdown {
-  font-size: 60px;
-  height: 15vh;
+  font-size: 80px;
+  height: 20vh;
 }
 </style>
 
 <h1 class="title">Chrome Calender by Animations Team</h1>
 <div id="img_wrapper">
-  <div id="holder"></div>
 </div>
 <div class="countdown">
   <div id="date" style="display: inline-block; width: 55vw;"></div>
-  <div id="timer" style="display: inline-block; width: 35vw; text-align: center;"></div>
+  <div id="timer" style="font-size: 120px; display: inline-block; width: 35vw; text-align: center;"></div>
 </div>
 
 <script>
@@ -36,7 +36,7 @@ const DAY_TO_MS = 1000 * 3600 * 24;
 const FIRST_DAY_2019 = new Date("Jan 1, 2019");
 const LAST_DAY_2019 = new Date("Dec 31, 2019");
 const SCOPE = LAST_DAY_2019 - FIRST_DAY_2019;
-const BORDER = 500;
+const BORDER = 1500;
 
 let events = [];
 events.push({date: new Date("May 17, 2019"), name: "M76 feature freeze"});
@@ -55,13 +55,14 @@ let nIntervId;
 
 // Load calendar
 let img = new Image();
-let holder = document.getElementById('holder');
-holder.appendChild(img);
+let wrapper = document.getElementById('img_wrapper');
+wrapper.appendChild(img);
 img.onload = function() {
   UpdateCalendar();
 }
 img.src = "full-calendar.jpg";
 img.style.height = "100%";
+img.style.verticalAlign = "middle";
 
 nIntervId = setInterval(UpdateCalendar, DAY_TO_MS);
 
@@ -93,7 +94,7 @@ function ResetOffset() {
   const TODAY = new Date();
   const PAST = TODAY - FIRST_DAY_2019;
   let progress = PAST / SCOPE * img.naturalWidth - BORDER;
-  holder.style.transform =
-      "translate(" + (-BORDER/2 - progress) + "px, " + -BORDER/2 + "px)";
+  img.style.transform =
+      "matrix(2, 0, 0, 2, " + -progress + ", 0)";
 }
 </script>
