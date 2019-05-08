@@ -5,38 +5,95 @@ body {
 }
 
 .title {
-  position:fixed;
-  top:0;
   text-align: center;
-  width: 100%;
+  height: 5vh;
+}
+
+#img_wrapper {
+  height: 80vh;
+  overflow: hidden;
+  will-change: transform;
+}
+
+.countdown {
+  font-size: 60px;
+  height: 15vh;
 }
 </style>
 
-<div id="holder" style="will-change:transform;"></div>
-<h1 class='title'>Chrome Calender by Animations Team</h1>
+<h1 class="title">Chrome Calender by Animations Team</h1>
+<div id="img_wrapper">
+  <div id="holder"></div>
+</div>
+<div class="countdown">
+  <div id="date" style="display: inline-block; width: 55vw;"></div>
+  <div id="timer" style="display: inline-block; width: 35vw; text-align: center;"></div>
+</div>
 
 <script>
+// Initialization
+const DAY_TO_MS = 1000 * 3600 * 24;
 const FIRST_DAY_2019 = new Date("Jan 1, 2019");
 const LAST_DAY_2019 = new Date("Dec 31, 2019");
-const DURATION = LAST_DAY_2019 - FIRST_DAY_2019;
-const TODAY = new Date();
-const PAST = TODAY - FIRST_DAY_2019;
+const SCOPE = LAST_DAY_2019 - FIRST_DAY_2019;
 const BORDER = 500;
 
-let img = new Image();
-holder.appendChild(img);
+let events = [];
+events.push({date: new Date("May 17, 2019"), name: "M76 feature freeze"});
+events.push({date: new Date("May 30, 2019"), name: "M76 branch cut"});
+events.push({date: new Date("June 28, 2019"), name: "M77 feature freeze"});
+events.push({date: new Date("July 25, 2019"), name: "M77 branch cut"});
+events.push({date: new Date("August 23, 2019"), name: "M78 feature freeze"});
+events.push({date: new Date("September 5, 2019"), name: "M78 branch cut"});
+events.push({date: new Date("October 4, 2019"), name: "M79 feature freeze"});
+events.push({date: new Date("October 17, 2019"), name: "M79 branch cut"});
+events.push({date: new Date("November 15, 2019"), name: "M80 feature freeze"});
+events.push({date: new Date("December 5, 2019"), name: "M80 branch cut"});
 
+let event_index = 0;
+let nIntervId;
+
+// Load calendar
+let img = new Image();
+let holder = document.getElementById('holder');
+holder.appendChild(img);
 img.onload = function() {
-  const image_width = img.naturalWidth;
-  const image_height = img.naturalHeight;
-  let progress = PAST / DURATION * image_width - BORDER;
-  holder.style.transform = "matrix(1.5, 0, 0, 1.5, " + 0 + ", 0)";
-  let animation = img.animate([
-    { transform: 'translateX(' + -progress + 'px)' },
-    { transform: 'translateX(' + -image_width + 'px)' }
-  ], {
-    duration: DURATION - PAST
-  });
+  UpdateCalendar();
 }
 img.src = "full-calendar.jpg";
+img.style.height = "100%";
+
+nIntervId = setInterval(UpdateCalendar, DAY_TO_MS);
+
+function UpdateCalendar() {
+  let remaining_days =
+      Math.ceil((events[event_index].date - new Date()) / DAY_TO_MS);
+
+  if (remaining_days < 0) {
+    event_index++;
+    if (event_index == events.length) {
+      clearInterval(nIntervId);
+      return;
+    }
+    remaining_days =
+        Math.ceil((events[event_index].date - new Date()) / DAY_TO_MS);
+  }
+
+  date.innerHTML = "Up next: " + events[event_index].name;
+
+  const color = remaining_days > 7 ? "green" :
+                remaining_days > 3 ? "orange" : "red";
+  timer.innerHTML = remaining_days == 0 ? "<font color='red'>IT'S TODAY</font>" :
+                    remaining_days == 1 ? "<font color='red'>IT'S TOMORROW</font>" :
+                    "in <font color=" + color + ">" + remaining_days + "</font> days";
+  ResetOffset();
+}
+
+function ResetOffset() {
+  const TODAY = new Date();
+  const PAST = TODAY - FIRST_DAY_2019;
+  let progress = PAST / SCOPE * img.naturalWidth - BORDER;
+  holder.style.transform =
+      "translate(" + (-BORDER/2 - progress) + "px, " + -BORDER/2 + "px)";
+}
 </script>
