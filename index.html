@@ -50,7 +50,14 @@ events.push({date: new Date("October 17, 2019"), name: "M79 branch cut"});
 events.push({date: new Date("November 15, 2019"), name: "M80 feature freeze"});
 events.push({date: new Date("December 5, 2019"), name: "M80 branch cut"});
 
-let event_index = 0;
+let event_index;
+for (let i = 0; i < events.length; ++i) {
+  if (new Date() < events[i].date) {
+    event_index = i;
+    break;
+  }
+}
+
 let nIntervId;
 
 // Load calendar
