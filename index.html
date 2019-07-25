@@ -39,16 +39,16 @@ const SCOPE = LAST_DAY_2019 - FIRST_DAY_2019;
 const BORDER = 1500;
 
 let events = [];
-events.push({date: new Date("May 17, 2019"), name: "M76 feature freeze"});
-events.push({date: new Date("May 30, 2019"), name: "M76 branch cut"});
-events.push({date: new Date("June 28, 2019"), name: "M77 feature freeze"});
-events.push({date: new Date("July 25, 2019"), name: "M77 branch cut"});
-events.push({date: new Date("August 23, 2019"), name: "M78 feature freeze"});
-events.push({date: new Date("September 5, 2019"), name: "M78 branch cut"});
-events.push({date: new Date("October 4, 2019"), name: "M79 feature freeze"});
-events.push({date: new Date("October 17, 2019"), name: "M79 branch cut"});
-events.push({date: new Date("November 15, 2019"), name: "M80 feature freeze"});
-events.push({date: new Date("December 5, 2019"), name: "M80 branch cut"});
+events.push({date: new Date("May 17, 2019 23:59:59"), name: "M76 feature freeze"});
+events.push({date: new Date("May 30, 2019 23:59:59"), name: "M76 branch cut"});
+events.push({date: new Date("June 28, 2019 23:59:59"), name: "M77 feature freeze"});
+events.push({date: new Date("July 25, 2019 23:59:59"), name: "M77 branch cut"});
+events.push({date: new Date("August 23, 2019 23:59:59"), name: "M78 feature freeze"});
+events.push({date: new Date("September 5, 2019 23:59:59"), name: "M78 branch cut"});
+events.push({date: new Date("October 4, 2019 23:59:59"), name: "M79 feature freeze"});
+events.push({date: new Date("October 17, 2019 23:59:59"), name: "M79 branch cut"});
+events.push({date: new Date("November 15, 2019 23:59:59"), name: "M80 feature freeze"});
+events.push({date: new Date("December 5, 2019 23:59:59"), name: "M80 branch cut"});
 
 let event_index;
 for (let i = 0; i < events.length; ++i) {
@@ -84,7 +84,7 @@ function UpdateCalendar() {
       return;
     }
     remaining_days =
-        Math.ceil((events[event_index].date - new Date()) / DAY_TO_MS);
+        Math.floor((events[event_index].date - new Date()) / DAY_TO_MS);
   }
 
   date.innerHTML = "Up next: " + events[event_index].name;
