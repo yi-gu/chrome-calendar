@@ -75,7 +75,7 @@ nIntervId = setInterval(UpdateCalendar, DAY_TO_MS);
 
 function UpdateCalendar() {
   let remaining_days =
-      Math.ceil((events[event_index].date - new Date()) / DAY_TO_MS);
+      Math.floor((events[event_index].date - new Date()) / DAY_TO_MS);
 
   if (remaining_days < 0) {
     event_index++;
