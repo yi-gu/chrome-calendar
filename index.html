@@ -36,7 +36,7 @@ const DAY_TO_MS = 1000 * 3600 * 24;
 const FIRST_DAY_2019 = new Date("Jan 1, 2019");
 const LAST_DAY_2019 = new Date("Dec 31, 2019");
 const SCOPE = LAST_DAY_2019 - FIRST_DAY_2019;
-const BORDER = 500;
+const BORDER = 2500;
 
 let events = [];
 events.push({date: new Date("May 17, 2019 23:59:59"), name: "M76 feature freeze"});
@@ -100,7 +100,7 @@ function UpdateCalendar() {
 function ResetOffset() {
   const TODAY = new Date();
   const PAST = TODAY - FIRST_DAY_2019;
-  let progress = PAST / SCOPE * img.naturalWidth - window.innerWidth / 2 - BORDER;
+  let progress = PAST / SCOPE * img.naturalWidth - window.innerWidth / 2 + BORDER;
   img.style.transform =
       "matrix(2, 0, 0, 2, " + -progress + ", 0)";
 }
