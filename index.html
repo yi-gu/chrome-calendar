@@ -97,8 +97,8 @@ function UpdateCalendar() {
 function ResetOffset() {
   const TODAY = new Date();
   const PAST = TODAY - FIRST_DAY_2020;
-  let progress = PAST / SCOPE * img.naturalWidth - window.innerWidth;
+  let progress = PAST / SCOPE * img.naturalWidth;
   img.style.transform =
-      "matrix(2, 0, 0, 2, " + -progress + ", 0)";
+      "matrix(3.4, 0, 0, 3.4, " + progress + window.innerWidth + ", 0)";
 }
 </script>
