@@ -33,22 +33,19 @@ body {
 <script>
 // Initialization
 const DAY_TO_MS = 1000 * 3600 * 24;
-const FIRST_DAY_2019 = new Date("Jan 1, 2019");
-const LAST_DAY_2019 = new Date("Dec 31, 2019");
-const SCOPE = LAST_DAY_2019 - FIRST_DAY_2019;
-const BORDER = 2500;
+const FIRST_DAY_2020 = new Date("Jan 1, 2020");
+const LAST_DAY_2020 = new Date("Dec 31, 2020");
+const SCOPE = LAST_DAY_2020 - FIRST_DAY_2020;
 
 let events = [];
-events.push({date: new Date("May 17, 2019 23:59:59"), name: "M76 feature freeze"});
-events.push({date: new Date("May 30, 2019 23:59:59"), name: "M76 branch cut"});
-events.push({date: new Date("June 28, 2019 23:59:59"), name: "M77 feature freeze"});
-events.push({date: new Date("July 25, 2019 23:59:59"), name: "M77 branch cut"});
-events.push({date: new Date("August 23, 2019 23:59:59"), name: "M78 feature freeze"});
-events.push({date: new Date("September 5, 2019 23:59:59"), name: "M78 branch cut"});
-events.push({date: new Date("October 4, 2019 23:59:59"), name: "M79 feature freeze"});
-events.push({date: new Date("October 17, 2019 23:59:59"), name: "M79 branch cut"});
-events.push({date: new Date("November 15, 2019 23:59:59"), name: "M80 feature freeze"});
-events.push({date: new Date("December 5, 2019 23:59:59"), name: "M80 branch cut"});
+events.push({date: new Date("February 28, 2020 23:59:59"), name: "M82 feature freeze"});
+events.push({date: new Date("March 12, 2020 23:59:59"), name: "M82 branch cut"});
+events.push({date: new Date("April 10, 2020 23:59:59"), name: "M83 feature freeze"});
+events.push({date: new Date("April 23, 2020 23:59:59"), name: "M83 branch cut"});
+events.push({date: new Date("May 22, 2020 23:59:59"), name: "M84 feature freeze"});
+events.push({date: new Date("June 4, 2020 23:59:59"), name: "M84 branch cut"});
+events.push({date: new Date("July 17, 2020 23:59:59"), name: "M85 feature freeze"});
+events.push({date: new Date("July 30, 2020 23:59:59"), name: "M85 branch cut"});
 
 let event_index;
 for (let i = 0; i < events.length; ++i) {
@@ -99,8 +96,8 @@ function UpdateCalendar() {
 
 function ResetOffset() {
   const TODAY = new Date();
-  const PAST = TODAY - FIRST_DAY_2019;
-  let progress = PAST / SCOPE * img.naturalWidth - window.innerWidth / 2 + BORDER;
+  const PAST = TODAY - FIRST_DAY_2020;
+  let progress = PAST / SCOPE * img.naturalWidth - window.innerWidth;
   img.style.transform =
       "matrix(2, 0, 0, 2, " + -progress + ", 0)";
 }
